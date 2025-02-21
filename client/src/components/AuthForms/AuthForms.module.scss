@@ -1,0 +1,196 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+// ============== COMMON ===============
+
+.authForm {
+  @include m.flexCol(10px);
+}
+
+.formContainerAuth {
+  @include m.flex(column, null, center);
+  width: 350px;
+  min-height: 412px;
+  position: relative;
+  border: 1px solid v.$formStroke;
+  border-radius: 1px;
+}
+
+.logo {
+  @include m.size(190px, 106px);
+}
+
+.formAuth {
+  @include m.flex(column, center, null, 6px);
+  width: 268px;
+}
+
+.inputAuth {
+  @include m.authInput();
+}
+
+.divider {
+  position: relative;
+  height: 15px;
+  margin-top: 22px;
+}
+
+.dividingLine {
+  border-top: 1px solid #dbdbdb;
+}
+
+.dividingWord {
+  @include m.positionRB(absolute, 50%, 50%);
+  @include m.flex(null, center, center);
+  @include m.size(56px, 15px);
+  @include m.text(13px, 600, null, v.$darkGrey);
+  transform: translateX(50%);
+  background-color: v.$main;
+  pointer-events: none;
+}
+.validError {
+  @include m.formErr;
+  padding-top: 2px;
+}
+
+.globalError {
+  @include m.formGlobalErr();
+}
+// ============== REGISTER ===============
+
+.logoR {
+  margin-top: 19px;
+  margin-bottom: 65px;
+}
+
+.description {
+  @include m.positionLT(absolute, null, 114px);
+  @include m.text(16px, 600, 20px, #737373);
+  width: 268px;
+  text-align: center;
+}
+.registerBtn {
+  @include m.primaryBtn;
+  margin-bottom: 26px;
+}
+
+.terms {
+  @include m.flexCol(18px);
+  @include m.text(11.81px, 400, 16px, #737373);
+  margin: 20px 0px;
+  text-align: center;
+}
+
+.termsLink {
+  @include m.text(12px, 400, 16px, #00376b);
+}
+
+.loginRef {
+  @include m.flex(null, center, center);
+  border: 1px solid #dbdbdb;
+  border-radius: 1px;
+  height: 70px;
+}
+
+.loginText {
+  @include m.text(14px, 400);
+  @include m.flex(null, center, center, 5px);
+}
+
+.loginLink {
+  color: #0095f6;
+  font-size: 14px;
+  font-weight: 600;
+}
+// ============== LOGIN ===============
+
+.loginBtn {
+  @include m.primaryBtn();
+  margin-top: 8px;
+}
+
+.changePassword {
+  @include m.text(12px, 400, null, #00376b);
+  position: absolute;
+  bottom: 23px;
+}
+
+.signupRef {
+  @include m.flex(null, center, center);
+  border: 1px solid #dbdbdb;
+  border-radius: 1px;
+  height: 63px;
+}
+
+.signupText {
+  @include m.flex(null, null, null, 5px);
+  @include m.text(14px, 400);
+}
+
+.signupLink {
+  @include m.text(14px, 500, null, #0095f6);
+}
+// ============== RESET ===============
+
+.formContainerReset {
+  @include m.flex(column, null, center);
+  @include m.size(390px, 536px);
+  position: relative;
+  border: 1px solid v.$formStroke;
+  border-radius: 2px;
+  padding-top: 25px;
+}
+
+.lock {
+  margin-bottom: 14px;
+}
+
+.formContainer > h2 {
+  @include m.text(16px, 600, 20px);
+  margin-bottom: 14px;
+}
+
+.formReset {
+  @include m.flex(column, center, null, 16px);
+  width: 300px;
+}
+
+.descriptionR {
+  @include m.text(14px, 400, 18px, v.$darkGrey);
+  text-align: center;
+}
+
+.inputReset {
+  @include m.resetInput();
+}
+
+.resetBtn {
+  @include m.primaryBtn();
+}
+
+.registerLinkR {
+  @include m.text(14px, 600, null, #262626);
+  margin-top: 10px;
+}
+
+.loginLinkR {
+  @include m.positionRB(absolute, 0, 0);
+  @include m.size(100%, 44px);
+  @include m.text(14px, 600, 18px, #262626);
+  @include m.flex(null, center, center);
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #f3f2f2eb;
+  }
+}
+
+// ============================== MEDIA ================================
+
+@media screen and (max-width: 400px) {
+  .formContainerReset {
+    width: 350px;
+  }
+}

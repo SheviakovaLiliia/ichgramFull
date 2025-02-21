@@ -1,0 +1,11 @@
+export { HomePage } from "./HomePage";
+export { LoginPage } from "./LoginPage";
+export { RegisterPage } from "./RegisterPage";
+export { ResetPage } from "./ResetPage";
+export { ResetPassPage } from "./ResetPassPage";
+export { NotFoundPage } from "./NotFoundPage";
+export { ProfilePage } from "./ProfilePage";
+export { EditProfilePage } from "./EditProfilePage";
+export { ChatPage } from "./ChatPage";
+export { ExplorePage } from "./ExplorePage";
+export { PostPage } from "./PostPage";

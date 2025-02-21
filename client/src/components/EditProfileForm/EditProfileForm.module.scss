@@ -1,0 +1,128 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.editForm {
+  @include m.flexCol();
+  max-width: 610px;
+}
+
+.changeImg {
+  @include m.flex(null, space-between, center);
+  background-color: #efefef;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 33px;
+}
+
+.preview {
+  @include m.flex(null, null, center, 16px);
+}
+
+.info {
+  @include m.flexCol(5px);
+  max-width: 270px;
+}
+
+.info h2 {
+  @include m.text(16px, 600, 20px);
+}
+
+.info p {
+  @include m.text(14px, 400, 18px, v.$darkGrey);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  height: 36px;
+}
+
+.uploadImgBtn,
+.saveBtn {
+  @include m.primaryBtn();
+}
+
+.saveBtn {
+  margin-top: 45px;
+}
+
+.uploadImgBtn {
+  @include m.flex(null, center, center);
+  cursor: pointer;
+}
+
+.label {
+  @include m.flexCol(7px);
+  @include m.text(16px, 600, 20px);
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.websiteIcon {
+  @include m.positionLT(absolute, 17px, 42px);
+}
+
+.usernameInput {
+  @include m.flex(null, null, center);
+  @include m.text(14px, 400);
+  border: 1px solid #dbdbdb;
+  border-radius: 12px;
+  outline: none;
+  height: 42px;
+  padding: 0px 16px;
+}
+
+.websiteInput {
+  @include m.flex(null, null, center);
+  @include m.text(14px, 600, null, #00376b);
+  border: 1px solid #dbdbdb;
+  border-radius: 12px;
+  outline: none;
+  height: 42px;
+  padding: 0px 36px;
+}
+
+.abouInput {
+  @include m.flex(null, null, center);
+  @include m.text(14px, 400, 18px);
+  border: 1px solid #dbdbdb;
+  border-radius: 12px;
+  outline: none;
+  padding: 4px 134px 4px 22px;
+  height: 62px;
+  resize: none;
+}
+
+.symbols {
+  @include m.positionRB(absolute, 16px, 2px);
+  @include m.text(12px, 400, 16px, v.$darkGrey);
+}
+
+.error {
+  @include m.formErr();
+}
+
+.globalError {
+  @include m.formGlobalErr();
+}
+
+.cropperModal {
+  @include m.positionRT(fixed, 0, 0);
+  @include m.size(calc(100vw - v.$sideBarW), calc(100vh - v.$footerH));
+  @include m.flex(null, center, center);
+  background-color: v.$modalBack;
+}
+
+.cropperContainer {
+  @include m.flex(column, center, center);
+  background-color: #000000cc;
+}
+
+.cropBtn {
+  @include m.size(100%, 32px);
+  background-color: #efefef;
+  font-size: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    background-color: #dedbdb;
+  }
+}

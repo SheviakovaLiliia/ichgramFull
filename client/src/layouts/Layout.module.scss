@@ -1,0 +1,235 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+.layout {
+  position: relative;
+  // background-color: rgba(250, 235, 215, 0.338);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pageContent {
+  width: calc(100% - v.$sideBarW);
+  min-height: calc(100vh - v.$footerH);
+  align-self: end;
+  position: relative;
+}
+
+.nav {
+  @include m.size(v.$sideBarW, calc(100% - v.$footerH));
+  // @include m.positionLT(absolute, 0, 0);
+  @include m.positionLB(absolute, 0, v.$footerH);
+  background-color: v.$main;
+  //   background-color: rgb(225, 201, 170);
+  border-right: 1px solid #dbdbdb;
+}
+
+.menu {
+  padding-top: 28px;
+  @include m.positionLT(sticky, 12px, 0);
+  height: fit-content;
+}
+
+.logo {
+  width: 97px;
+  margin-bottom: 20px;
+  margin-left: 24px;
+}
+
+.nav {
+  //   display: flex;
+  //   flex-direction: column;
+}
+
+.navLink {
+  @include m.size(100%, 48px);
+  @include m.flex(null, null, center, 16px);
+  @include m.text(16px, 400, 20px, v.$textColor);
+  cursor: pointer;
+  padding-left: 24px;
+  transition: 0.2s ease;
+
+  &:last-child {
+    margin-top: 47px;
+  }
+
+  &:hover {
+    background-color: rgba(233, 230, 230, 0.729);
+  }
+}
+
+.navLink {
+  p {
+    transition: 0.2s ease;
+  }
+}
+
+.activeNavLink {
+  @include m.size(100%, 48px);
+  @include m.flex(null, null, center, 16px);
+  @include m.text(16px, 700, 20px, v.$textColor);
+  cursor: pointer;
+  padding-left: 24px;
+  transition: 0.2s ease;
+
+  &:last-child {
+    margin-top: 47px;
+  }
+
+  &:hover {
+    background-color: rgba(233, 230, 230, 0.729);
+  }
+}
+
+.navActive {
+  font-weight: 700;
+}
+
+.profileImg {
+  width: 24px;
+  transition: 0.2s ease;
+}
+
+.footer {
+  @include m.flex(column, null, center);
+  background-color: v.$main;
+  height: v.$footerH;
+}
+
+.navLinks {
+  padding-top: 24px;
+  display: flex;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.footer a,
+footer p {
+  @include m.text(12px, 400, 16px, v.$darkGrey);
+  transition: 0.2s ease;
+
+  &:hover {
+    color: v.$darkGreyHover;
+  }
+}
+
+// ============================ ~MEDIA~ ===============================
+
+@media screen and (max-width: 1200px) {
+  .pageContent {
+    width: calc(100% - v.$sideBarWR);
+    min-height: calc(100vh - v.$footerHR);
+  }
+
+  .nav {
+    @include m.size(v.$sideBarWR, calc(100% - v.$footerHR));
+    bottom: v.$footerHR;
+  }
+
+  .menu {
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .navLink {
+    width: 100%;
+    @include m.flex(null, center, center);
+    padding-left: 0px;
+
+    &:last-child {
+      margin-top: 0px;
+    }
+  }
+
+  .navLink {
+    p {
+      display: none;
+    }
+  }
+
+  .activeNavLink {
+    p {
+      display: none;
+    }
+  }
+
+  .activeNavLink {
+    @include m.flex(null, center, center);
+    padding-left: 0px;
+
+    &:last-child {
+      margin-top: 0px;
+    }
+  }
+
+  .footer {
+    @include m.flex(row, null center, 8px);
+    flex-wrap: wrap;
+    height: v.$footerHR;
+  }
+
+  .navLinks {
+    padding-top: 0px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0px;
+  }
+
+  .footer a,
+  footer p {
+    @include m.text(10px, 400, 12px, v.$darkGrey);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pageContent {
+    width: 100%;
+    min-height: calc(100vh - v.$footerHR - v.$sideBarWR);
+  }
+
+  .nav {
+    @include m.positionLB(fixed, 0, 0);
+    @include m.size(100%, 60px);
+    border-right: none;
+    border-top: 1px solid #dbdbdb;
+    z-index: 1000;
+  }
+
+  .menu {
+    @include m.size(100%, 100%);
+    position: static;
+    display: flex;
+    background-color: v.$main;
+    padding-top: 0px;
+  }
+  .navigation {
+    @include m.flex(row, center, center, 20px);
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .navigation img {
+    width: 30px;
+  }
+
+  .navLink,
+  .activeNavLink {
+    &:hover {
+      background-color: v.$main;
+    }
+  }
+
+  .footer {
+    margin-bottom: v.$footerHR;
+  }
+  .navLinks {
+    display: none;
+  }
+}

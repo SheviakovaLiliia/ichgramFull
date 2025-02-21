@@ -1,0 +1,655 @@
+@use "../styles/variables" as v;
+@use "../styles/mixins" as m;
+
+// =========== HOME PAGE ==============
+
+.homePage {
+  height: 100%;
+  padding: 58px 78px 28px 78px;
+}
+
+.homeScroller {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 600px;
+  gap: 23px;
+}
+
+.updatesMsgHome {
+  @include m.flex(column, center, center);
+  height: 216px;
+  h3 {
+    @include m.text(17px, 400, 21px);
+    margin-top: 10px;
+  }
+  p {
+    @include m.text(12px, 400, 15px, v.$darkGrey);
+  }
+}
+
+.searchMsg {
+  @include m.size(300px, 280px);
+  @include m.flex(column, center, center, 10px);
+  margin: 0 auto;
+  h3 {
+    @include m.text(20px, 500, 22px);
+  }
+  p {
+    @include m.text(16px, 400, 20px, v.$darkGrey);
+    cursor: pointer;
+    transition: 0.2s ease;
+    &:hover {
+      font-weight: 500;
+    }
+  }
+  img {
+    @include m.size(100px, 100px);
+    transition: 0.2s ease;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background-color: #efefef;
+    }
+  }
+}
+
+// =========== AUTH PAGES ==============
+
+.loginPage,
+.registerPage,
+.resetPage {
+  padding-top: 85px;
+  display: flex;
+  justify-content: center;
+}
+
+.loginMain {
+  @include m.flex(null, center, start, 32px);
+}
+
+// =========== PROFILE PAGE ==============
+
+.profilePage {
+  @include m.flex(null, center);
+  // align-items: center;
+  position: relative;
+  height: 100%;
+  // padding: 30px 110px;
+  padding: 30px;
+}
+
+.profilePageContent {
+  @include m.flexCol(46px);
+}
+
+.postsProfile {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 307px;
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  // gap: 4px;
+}
+
+.postLinkProfile {
+  @include m.flex(null, center, center);
+  aspect-ratio: 1 / 1;
+  width: 307px;
+  overflow: hidden;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.postImgProfile {
+  @include m.size(100%, 100%);
+  object-fit: cover;
+}
+
+// =========== EDIT PROFILE PAGE ==============
+
+.editProfilePage {
+  @include m.flexCol(44px);
+  padding: 48px 167px;
+}
+
+.editProfilePage h1 {
+  @include m.text(20px, 700, 25px);
+}
+
+// =========== EXPLORE PAGE ==============
+
+.explorePage {
+  @include m.flex(null, center);
+  padding: 40px 0px;
+  position: relative;
+}
+
+.exploreScroller {
+  @include m.flexCol(4px);
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.postsExploreGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 316px);
+  grid-auto-rows: 316px;
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+}
+
+.explorePostLink {
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.postExploreFlex {
+  @include m.flex(column, null, center, 4px);
+}
+
+.postImgContainer {
+  @include m.flex(null, center, center);
+  @include m.size(100%, 100%);
+  // width: 100%;
+  // height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.postImg {
+  @include m.size(100%, 100%);
+  object-fit: cover;
+}
+
+.searchForm {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.searchInput {
+  @include m.size(100%, 40px);
+  @include m.noBorder();
+  background-color: #efefef;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 32px;
+}
+
+.searchInput::placeholder {
+  @include m.text(16px, 300, null, v.$darkGrey);
+}
+
+.searchReset {
+  @include m.positionRT(absolute, 10px, 50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+// =========== POST PAGE ==============
+
+.postPage {
+  @include m.flex(null, center);
+  padding: 60px 20px;
+}
+
+.postPageContent {
+  @include m.size(80%, fit-content);
+  @include m.scrollY;
+  display: block;
+  margin: 0 auto;
+  background-color: v.$main;
+  box-shadow: 10px 10px 17px -4px rgba(0, 0, 0, 0.75);
+}
+
+.imageContainer {
+  @include m.flex(null, center, center);
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  width: 100%;
+}
+
+.postImg {
+  @include m.size(100%, 100%);
+  object-fit: cover;
+}
+
+.interactiveSide {
+  @include m.flexCol();
+  border: 1px solid #dbdbdb;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 100%;
+  // width: calc(100% - 68vh);
+}
+
+.authorContainer {
+  @include m.flex(null, space-between, center);
+  height: 50px;
+  padding: 0px 14px;
+  border-bottom: 0.85px solid #efefef;
+}
+
+.authorInfo {
+  @include m.flex(null, null, center, 10px);
+}
+
+.authorInfo .followAuthorBtn {
+  @include m.text(12px, 600, null, #0095f6);
+  cursor: pointer;
+
+  &:hover {
+    @include m.text(12px, 700, null, #2851a3);
+  }
+}
+
+.authorInfo > p,
+.contentSide > p > span {
+  @include m.text(12px, 500);
+}
+
+.viewMore {
+  cursor: pointer;
+}
+
+.contentAndComments {
+  // @include m.scrollY();
+  // height: calc(100% - 120px); ///calc 100% - (50px + 70px + 50px)
+  border-bottom: 0.85px solid #efefef;
+}
+
+.content {
+  padding: 10px 14px;
+  display: flex;
+}
+
+.photoSide {
+  margin-right: 10px;
+}
+
+.contentSide {
+  @include m.text(12px, 400, 15px);
+  padding-right: 4px;
+  // padding-top: 4px;
+}
+
+.date {
+  @include m.text(10px, 400, 13px, v.$darkGrey);
+}
+
+.comments {
+  @include m.flexCol(10px);
+}
+
+.reactionsContainer {
+  @include m.flex(column, space-between);
+  height: 70px;
+  border-bottom: 0.85px solid #efefef;
+  padding: 4px 14px;
+}
+
+.reactions {
+  @include m.flex(null, null, center, 14px);
+  margin: 6px 0px;
+}
+
+.reactions img {
+  cursor: pointer;
+  width: 21px;
+}
+
+.postLikes {
+  @include m.text(12px, 400, 15px);
+}
+
+.writeComment {
+  @include m.noBorder();
+  height: 50px;
+  position: relative;
+}
+.form {
+  height: 100%;
+}
+
+.commentInput {
+  @include m.size(100%, 100%);
+  @include m.noBorder();
+  padding: 0px 48px;
+}
+
+.sendCommentBtn {
+  @include m.positionRT(absolute, 14px, 50%);
+  @include m.noBorder();
+  @include m.text(12px, 600, null, #0095f6);
+  transform: translateY(-50%);
+  padding: 0px 4px;
+  background-color: #ffffff;
+  &:hover {
+    @include m.text(12px, 700, null, #2851a3);
+  }
+}
+
+.emojiBtn {
+  @include m.positionLT(absolute, 14px, 50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+  border-radius: 50%;
+  &:hover {
+    width: 22px;
+  }
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 40px;
+}
+// =========== CHAT PAGE ==============
+
+.chatPage {
+  @include m.size(100%, calc(100vh - v.$footerH));
+  display: flex;
+  // @include m.flex(null)
+}
+
+.chatList {
+  @include m.size(397px, 100%);
+  @include m.scrollY();
+  // background-color: rgb(150, 193, 194);
+  border-right: 1px solid #dbdbdb;
+  padding: 34px 0px;
+}
+
+.chatList > h2 {
+  @include m.text(20px, 700, 25px);
+  padding-left: 24px;
+  margin-bottom: 50px;
+}
+
+.chats {
+}
+
+.chatLink {
+  @include m.flex(null, null, null, 10px);
+  padding: 8px 24px;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+.chatText {
+  @include m.flex(column, space-evenly);
+}
+
+.chatUsername {
+  @include m.text(14px, 400, 18px);
+}
+
+.chatInfo {
+  @include m.text(14px, 400, 16px, v.$darkGrey);
+}
+
+.chatMain {
+  @include m.size(calc(100% - 397px), 100%);
+  // background-color: rgb(248, 226, 226);
+}
+
+.msgWelcome {
+  @include m.size(200px, 100%);
+  @include m.flex(column, center, center, 16px);
+  margin: 0 auto;
+
+  img {
+    @include m.size(140px, 140px);
+    padding: 30px;
+    border-radius: 50%;
+    border: 2px solid #000000;
+  }
+
+  h3 {
+    @include m.text(22px, 500, 26px);
+  }
+}
+
+// =========== NOT FOUND PAGE ==============
+
+.notFoundPage {
+  @include m.flex(null, null, null, 44px);
+  padding: 94px 119px 50px 119px;
+}
+
+.notFoundImg {
+  width: 301px;
+}
+
+.notFoundText {
+  @include m.flexCol(10px);
+  h2 {
+    @include m.text(36px, 700, null);
+    margin-top: 47px;
+  }
+  p {
+    @include m.text(16px, 600, 20px, v.$darkGrey);
+    max-width: 467px;
+  }
+}
+
+// ============================ MEDIA ===============================
+// =========================================================== 1200
+@media screen and (max-width: 1200px) {
+  // ===== Explore Page ====
+
+  .postsExploreGrid {
+    grid-template-columns: repeat(3, 300px);
+    grid-auto-rows: 300px;
+  }
+
+  // ===== Chat Page ====
+  .chatPage {
+    @include m.size(100%, calc(100vh - v.$footerHR));
+  }
+
+  .chatList {
+    @include m.size(270px, 100%);
+    padding: 10px 0px;
+  }
+  .chatList > h2 {
+    @include m.text(20px, 700, 25px);
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .chatLink {
+    padding: 10px;
+  }
+
+  .chatUsername {
+    @include m.text(12px, 400, 14px);
+  }
+
+  .chatInfo {
+    @include m.text(12px, 400, 12px, v.$darkGrey);
+  }
+
+  .chatMain {
+    @include m.size(calc(100% - 270px), 100%);
+    // background-color: rgb(248, 226, 226);
+  }
+
+  // ===== Not Found Page ====
+  .notFoundPage {
+    padding: 50px;
+  }
+}
+
+//homepage
+// =========================================================== 1080
+@media screen and (max-width: 1080px) {
+  // ===== Home Page ====
+  .homePage {
+    padding: 20px 10px;
+  }
+  .homeScroller {
+    gap: 8px;
+  }
+}
+
+// =========================================================== 1024
+
+@media screen and (max-width: 1024px) {
+  // ===== Explore Page ====
+  .explorePage {
+    padding: 20px 0px;
+  }
+
+  .postsExploreGrid {
+    grid-template-columns: repeat(3, 240px);
+    grid-auto-rows: 210px;
+  }
+
+  // ===== Profile Page ====
+
+  .profilePageContent {
+    gap: 20px;
+  }
+
+  .postsProfile {
+    width: fit-content;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .postImgProfile {
+    @include m.size(100%, 100%);
+    object-fit: cover;
+  }
+
+  // ===== Not Found Page ====
+  .notFoundPage {
+    padding: 20px;
+    gap: 20px;
+  }
+  .notFoundImg {
+    width: 150px;
+  }
+}
+
+// =========================================================== 768
+@media screen and (max-width: 768px) {
+  // ===== Home Page ====
+  .homePage {
+    padding: 10px;
+  }
+  .homeScroller {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    // grid-auto-rows: 600px;
+    // gap: 23px;
+  }
+  // ===== Auth Pages ====
+  .loginImg {
+    display: none;
+  }
+  .loginPage,
+  .registerPage,
+  .resetPage {
+    height: 100vh;
+    padding-top: 0px;
+    align-items: center;
+    padding: 20px 0px;
+  }
+
+  // ===== Profile Page ====
+  .profilePage {
+    padding: 20px;
+  }
+
+  .profilePageContent {
+    gap: 30px;
+  }
+
+  .postsProfile {
+    @include m.flex(column, null, center, 10px);
+    margin: 0 auto;
+  }
+
+  // ===== Explore Page ====
+
+  .explorePage {
+    @include m.flex(column, start, center);
+    padding: 10px;
+  }
+
+  // ===== Post Page ====
+  .postPage {
+    padding: 20px 10px;
+  }
+
+  .postPageContent {
+    @include m.size(94%, fit-content);
+  }
+
+  // ===== Chat Page ====
+  .chatPage {
+    @include m.size(100%, calc(100vh - v.$footerHR - v.$footerHR));
+  }
+
+  .chatList {
+    @include m.size(80px, 100%);
+    padding: 10px 0px;
+  }
+  .chatList > h2 {
+    @include m.text(20px, 700, 25px);
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .chatLink {
+    @include m.flex(column, center, center, 6px);
+  }
+
+  .chatUsername {
+    font-size: 10px;
+  }
+
+  .chatInfo {
+    display: none;
+  }
+
+  .chatMain {
+    @include m.size(calc(100% - 80px), 100%);
+    // background-color: rgb(248, 226, 226);
+  }
+
+  // ===== Not Found Page ====
+  .notFoundPage {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .notFoundText {
+    @include m.flexCol(10px);
+    h2 {
+      @include m.text(16px, 700, null);
+      margin-top: 20px;
+    }
+    p {
+      @include m.text(10px, 600, 12px, v.$darkGrey);
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+}

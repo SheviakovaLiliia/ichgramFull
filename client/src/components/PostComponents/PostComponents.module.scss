@@ -1,0 +1,91 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+// ===================== POSTCARD =====================
+
+.postCard {
+  border-bottom: 0.89px solid #dbdbdb;
+  max-width: 405px;
+  margin: 0 auto;
+}
+
+.userInfo {
+  @include m.flex(null, null, center, 10px);
+  margin-bottom: 10px;
+}
+
+.username {
+  @include m.text(12px, 600);
+}
+
+.date {
+  @include m.text(12px, 400, null, v.$darkGrey);
+}
+
+.follow {
+  @include m.text(12px, 600, null, #0095f6);
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.postImgContainer {
+  @include m.flex(null, center, center);
+  width: 404px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.postImg {
+  @include m.size(100%, 100%);
+  object-fit: cover;
+}
+
+.reactions {
+  @include m.flex(null, null, null, 13px);
+  padding: 6px 0px;
+  margin: 4px 0px;
+}
+
+.reactions img {
+  @include m.size(20px, 20px);
+  cursor: pointer;
+}
+
+.likes {
+  @include m.text(12px, 600);
+}
+
+.content {
+  @include m.text(12px, 400, 15px);
+  margin: 7px 0px;
+}
+
+.more {
+  @include m.text(12px, 400, null, v.$darkGrey);
+  cursor: pointer;
+  &:hover {
+    font-weight: 500;
+  }
+}
+
+.commentLink {
+  @include m.text(12px, 400, null, v.$darkGrey);
+  margin-bottom: 34px;
+  &:hover {
+    font-weight: 500;
+  }
+}
+
+// ===================== ~MEDIA~ =====================
+
+@media screen and (max-width: 1080px) {
+  .postCard {
+    max-width: 340px;
+  }
+  .postImgContainer {
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+}

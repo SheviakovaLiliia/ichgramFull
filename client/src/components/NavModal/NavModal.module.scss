@@ -1,0 +1,407 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.modal {
+  @include m.positionLT(absolute, 0, 0);
+  @include m.size(100%, 100%);
+  background-color: v.$modalBack;
+  // animation: fadeIn 0.5s ease;
+  z-index: 500;
+}
+
+.sideContainer {
+  height: 100%;
+  @include m.size(397px, 100%);
+  position: relative;
+  background-color: v.$main;
+  // animation: slideIn 0.5s ease;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+.stickyBody {
+  @include m.positionLT(sticky, 0, 0);
+  @include m.size(100%, calc(100vh - v.$footerH));
+  @include m.scrollY;
+}
+
+.centerContainer {
+  @include m.positionLT(sticky, null, 10vh);
+  @include m.size(80%, 60vh);
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: v.$main;
+}
+
+.validError {
+  @include m.formErr;
+  padding-top: 2px;
+}
+
+.closeModalBtn {
+  @include m.positionRT(absolute, 20px, 20px);
+  @include m.size(26px, 26px);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 397px;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    width: 397px;
+  }
+  to {
+    width: 0;
+  }
+}
+
+// ====================== SEARCH ======================
+
+.search {
+  padding: 16px;
+}
+
+.search h1 {
+  @include m.text(24px, 600, 30px);
+  margin-left: 8px;
+  margin-bottom: 39px;
+}
+
+.searchForm {
+  position: relative;
+  margin-bottom: 46px;
+}
+
+.searchInput {
+  @include m.size(100%, 40px);
+  @include m.noBorder();
+  background-color: #efefef;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 32px;
+}
+
+.searchInput::placeholder {
+  @include m.text(16px, 300, null, v.$darkGrey);
+}
+
+.searchReset {
+  @include m.positionRT(absolute, 10px, 50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.searchResults {
+}
+
+.recent {
+  @include m.flexCol(26px);
+}
+
+.recent h2 {
+  @include m.text(16px, 600, 20px);
+}
+
+.results {
+  @include m.flexCol(10px);
+  margin-bottom: 10px;
+}
+
+.result {
+  @include m.flex(null, null, center, 8px);
+  color: #000000;
+  cursor: pointer;
+}
+
+.result > p {
+  @include m.text(14px, 700);
+}
+
+// ====================== NOTIFICATIONS ======================
+
+.notifications {
+  @include m.flexCol(16px);
+  padding: 20px 24px;
+}
+
+.notifications > h1 {
+  @include m.text(24px, 700, 30px);
+}
+
+.notifications > h2 {
+  @include m.text(16px, 700, 20px);
+}
+
+.deleteAllBtn {
+  @include m.secondaryBtn();
+  width: 140px;
+  position: absolute;
+  right: 20px;
+  top: 54px;
+}
+
+.notification {
+  @include m.flex(null, space-between, null);
+}
+
+.notification img {
+  width: 44px;
+}
+
+.leftPart {
+  @include m.flex(null, null, center, 14px);
+}
+
+.text {
+  @include m.text(14px, 400, 18px);
+  max-width: 155px;
+}
+
+.username {
+  @include m.text(14px, 600, 18px);
+}
+
+.time {
+  color: v.$darkGrey;
+}
+
+.delete {
+  // @include m.size(20px, 20px);
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0.2;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.imgContainer {
+  overflow: hidden;
+  @include m.size(40px, 40px);
+  @include m.flex(null, center, center);
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  opacity: 0.9;
+
+  img {
+    @include m.size(100%, 100%);
+    object-fit: cover;
+  }
+}
+
+// ====================== CREATE ======================
+
+.createPost {
+  @include m.size(100%, 100%);
+  border-radius: 12px;
+}
+
+.formHeader {
+  @include m.size(100%, 43px);
+  @include m.flex(null, center, center);
+  border-bottom: 1px solid #dbdbdb;
+  position: relative;
+}
+
+.headerText {
+  @include m.text(16px, 600, 24px);
+}
+
+.createPostBtn {
+  @include m.positionRT(absolute, 16px, 50%);
+  @include m.noBorder();
+  @include m.text(14px, 600, 18px, #0095f6);
+  transform: translateY(-50%);
+  padding: 0px 4px;
+  background-color: #ffffff;
+  transition: 0.1s ease;
+  &:hover {
+    @include m.text(14px, 700, 18px, #2851a3);
+  }
+}
+
+.createPostMain {
+  display: flex;
+}
+
+.imgUploadContainer {
+  @include m.size(calc(60vh - 43px), calc(60vh - 43px));
+  @include m.flex(null, center, center);
+  background-color: #fafafa;
+  border-right: 1px solid #dbdbdb;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  border-bottom-left-radius: 12px;
+}
+//some changes
+.imgUploadContainerEdit {
+  @include m.size(calc(68vh - 43px), calc(68vh - 43px));
+  @include m.flex(null, center, center);
+  background-color: #fafafa;
+  border-right: 1px solid #dbdbdb;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.uploaderImg {
+  position: absolute;
+}
+
+.fileInputCreate {
+  @include m.size(100%, 100%);
+  opacity: 0;
+}
+
+.imgUploadPreview {
+  @include m.positionLT(absolute, 0, 0);
+  @include m.size(100%, 100%);
+  object-fit: cover;
+  // border-bottom-left-radius: 12px;
+}
+
+.contentSide {
+  @include m.flexCol(10px);
+  width: calc(100% - (60vh - 43px));
+}
+
+.writePost {
+  width: 100%;
+  height: 30vh;
+  position: relative;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.createPostInput {
+  @include m.size(100%, calc(100% - 40px));
+  @include m.noBorder();
+  @include m.text(12px, 400, 16px);
+  padding: 22px;
+  resize: none;
+}
+
+.emojiBtn {
+  @include m.positionLB(absolute, 16px, 12px);
+  cursor: pointer;
+  border-radius: 50%;
+  &:hover {
+    width: 22px;
+  }
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: -38vh;
+  left: 0;
+}
+
+.symbols {
+  @include m.positionRB(absolute, 16px, 12px);
+  @include m.text(12px, 400, 16px, #c7c7c7);
+}
+
+// ====================== ~MEDIA~ ======================
+
+@media screen and (max-width: 1024px) {
+  .stickyBody {
+    @include m.size(100%, calc(100vh - v.$footerHR));
+  }
+
+  // ========================= Create
+  .createPost {
+    @include m.size(100%, 100%);
+    border-radius: 12px;
+  }
+
+  .formHeader {
+    @include m.size(100%, 43px);
+    @include m.flex(null, center, center);
+    border-bottom: 1px solid #dbdbdb;
+    position: relative;
+  }
+
+  .createPostMain {
+    width: 100%;
+    height: calc(100% - 43px);
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .imgUploadContainerEdit {
+    @include m.size(200px, 200px);
+  }
+  .imgUploadContainer {
+    @include m.size(200px, 200px);
+  }
+  .contentSide {
+    width: 100%;
+    height: fit-content;
+    gap: 0px;
+  }
+
+  .writePost {
+    width: 100%;
+    height: 30vh;
+    position: relative;
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  .fileInputCreate {
+    @include m.size(200px, 200px);
+    opacity: 0;
+  }
+
+  .imgUploadPreview {
+    left: 50%;
+    transform: translateX(-50%);
+    @include m.size(200px, 200px);
+  }
+
+  .emojiPicker {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  // ========================= Create
+  .emojiPicker {
+    position: fixed;
+    bottom: 10vh;
+  }
+}

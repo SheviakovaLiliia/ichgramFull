@@ -1,0 +1,134 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.profileInfo {
+  display: flex;
+  gap: 94px;
+  align-self: flex-start;
+}
+
+.info {
+  @include m.flexCol(20px);
+}
+
+.header {
+  @include m.flex(null, null, center, 20px);
+}
+
+.header > p {
+  @include m.text(20px, 500);
+}
+
+.btns {
+  @include m.flex(null, null, null, 8px);
+}
+
+.followBtn {
+  @include m.primaryBtn();
+  width: 132px;
+}
+
+.messageBtn,
+.editBtn {
+  @include m.secondaryBtn();
+}
+
+.countedInfo {
+  @include m.flex(null, space-between, center);
+}
+
+.countedInfo > div {
+  @include m.text(16px, 400);
+}
+
+.countedInfo div span {
+  @include m.text(16px, 600);
+}
+
+.description {
+  @include m.flexCol(8px);
+}
+
+.bio {
+  @include m.text(14px, 400, 18px);
+  max-width: 434px;
+}
+
+.more {
+  @include m.text(14px, 400, 18px, v.$darkGrey);
+  cursor: pointer;
+  &:hover {
+    font-weight: 500;
+  }
+}
+
+.website {
+  @include m.flex(null, null, center, 3px);
+  cursor: pointer;
+}
+
+.website > p {
+  @include m.text(14px, 600, null, #00376b);
+}
+
+.avatar {
+  position: relative;
+  z-index: 50;
+}
+
+.avatar::after {
+  content: "";
+  @include m.positionLT(absolute, 50%, 50%);
+  @include m.size(114%, 114%);
+  position: absolute;
+  background-image: url("../../assets/coloredBorder.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+@media screen and (max-width: 1024px) {
+  .profileInfo {
+    gap: 30px;
+  }
+
+  .header {
+    @include m.flex(column, null, start, 10px);
+  }
+
+  .bio {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profileInfo {
+    @include m.flex(column, center, center, 10px);
+    margin: 30px 0px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #dbdbdb;
+    width: 320px;
+  }
+
+  .header {
+    margin-top: 10px;
+    align-items: center;
+  }
+  // .countedInfo {
+  //   max-width: 320px;
+  // }
+
+  .btns {
+    button {
+      width: 140px;
+    }
+  }
+  // .header {
+  //   @include m.flex(column, null, start, 10px);
+  // }
+
+  // .bio {
+  //   max-width: 270px;
+  // }
+}

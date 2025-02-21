@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+    env_file:
+      - ./client/.env
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./server
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./server/.env
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

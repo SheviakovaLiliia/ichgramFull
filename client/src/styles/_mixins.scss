@@ -1,0 +1,162 @@
+@use "./variables" as v;
+
+// ============ COMMON ===========
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin text($size, $weight: 400, $line: normal, $color: #000000) {
+  font-size: $size;
+  @if $weight != null {
+    font-weight: $weight;
+  }
+  @if $line != null {
+    line-height: $line;
+  }
+  @if $color != null {
+    color: $color;
+  }
+}
+
+@mixin noBorder() {
+  border: none;
+  outline: none;
+}
+
+@mixin flex($dir: row, $j: start, $a: start, $g: 0) {
+  display: flex;
+  @if $dir != null {
+    flex-direction: $dir;
+  }
+  @if $j != null {
+    justify-content: $j;
+  }
+  @if $a != null {
+    align-items: $a;
+  }
+
+  @if $g != 0 {
+    gap: $g;
+  }
+}
+
+@mixin flexCol($g: 0) {
+  display: flex;
+  flex-direction: column;
+
+  @if $g != 0 {
+    gap: $g;
+  }
+}
+
+@mixin positionLT($p, $l: 0, $t: 0) {
+  position: $p;
+  left: $l;
+  top: $t;
+}
+
+@mixin positionRT($p, $r: 0, $t: 0) {
+  position: $p;
+  right: $r;
+  top: $t;
+}
+
+@mixin positionRB($p, $r: 0, $b: 0) {
+  position: $p;
+  right: $r;
+  bottom: $b;
+}
+
+@mixin positionLB($p, $l: 0, $b: 0) {
+  position: $p;
+  left: $l;
+  bottom: $b;
+}
+
+@mixin scrollY {
+  overflow: hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+// ============ COMPONENTS ===========
+
+@mixin primaryBtn() {
+  @include noBorder();
+  @include text(14px, 600, null, v.$main);
+  background-color: v.$primaryBtn;
+  border-radius: 8px;
+  height: 32px;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #0686dc;
+  }
+  &:disabled {
+    background-color: #efefef;
+    color: v.$darkGrey;
+    cursor: auto;
+  }
+}
+
+@mixin secondaryBtn() {
+  @include noBorder();
+  @include size(190px, 32px);
+  @include text(14px, 600, null, #000000);
+  border-radius: 8px;
+  background-color: #efefef;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #e3e2e2;
+  }
+}
+
+@mixin authInput() {
+  @include size(100%, 38px);
+  @include text(12px, 400, null, v.$darkGrey);
+  border-radius: 3px;
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  padding-left: 8px;
+  transition: 0.2s ease;
+
+  &:focus {
+    border: 1px solid #afacac;
+    outline: none;
+    box-shadow: 0 0 1px 1px #ecebeb7f;
+  }
+}
+
+@mixin resetInput() {
+  @include size(100%, 40px);
+  @include text(14px, 400, null, v.$darkGrey);
+  padding-left: 9px;
+  border-radius: 3px;
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+
+  &:focus {
+    border: 1px solid #afacac;
+    outline: none;
+    box-shadow: 0 0 1px 1px #ecebeb7f;
+  }
+}
+
+@mixin formErr() {
+  @include text(12px, 400, null, #ff0014);
+}
+// change it later!
+@mixin formGlobalErr() {
+  @include flex(null, center, center);
+  @include text(12px, 400, null, #ff0014);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #f64c5ae1;
+  background-color: #f6e4e6a7;
+}

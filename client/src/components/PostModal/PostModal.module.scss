@@ -1,0 +1,325 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.postModal {
+  @include m.positionLT(absolute, v.$sideBarW);
+  @include m.size(calc(100% - v.$sideBarW), calc(100% - v.$footerH));
+  @include m.flex(null, center);
+  background-color: rgba(0, 0, 0, 0.488);
+  padding-top: 47px;
+  z-index: 60;
+}
+
+.postModalContent {
+  @include m.positionLT(sticky, null, 10vh);
+  @include m.size(80%, 68vh);
+  margin: 0 auto;
+  background-color: v.$main;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: flex;
+}
+
+.imageContainer {
+  @include m.flex(null, center, center);
+  position: relative;
+  width: 68vh;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.postImg {
+  @include m.size(100%, 100%);
+  object-fit: cover;
+}
+
+.interactiveSide {
+  @include m.flexCol();
+  width: calc(100% - 68vh);
+}
+
+.authorContainer {
+  @include m.flex(null, space-between, center);
+  height: 50px;
+  padding: 0px 14px;
+  border-bottom: 0.85px solid #efefef;
+}
+
+.authorInfo {
+  @include m.flex(null, null, center, 10px);
+}
+
+.authorInfo .followAuthorBtn {
+  @include m.text(12px, 600, null, #0095f6);
+  cursor: pointer;
+  // transform: translateY(-50%);
+  // padding: 0px 4px;
+  // background-color: #ffffff;
+  &:hover {
+    @include m.text(12px, 700, null, #2851a3);
+  }
+}
+
+.authorInfo > p,
+.contentSide > p > span {
+  @include m.text(12px, 500);
+}
+
+.viewMore {
+  cursor: pointer;
+}
+
+.contentAndComments {
+  @include m.scrollY();
+  height: calc(100% - 120px); ///calc 100% - (50px + 70px + 50px)
+  border-bottom: 0.85px solid #efefef;
+}
+
+.content {
+  padding: 10px 14px;
+  display: flex;
+}
+
+.photoSide {
+  margin-right: 10px;
+}
+
+.contentSide {
+  @include m.text(12px, 400, 15px);
+  padding-right: 4px;
+  // padding-top: 4px;
+}
+
+.date {
+  @include m.text(10px, 400, 13px, v.$darkGrey);
+}
+
+.comments {
+  @include m.flexCol(10px);
+}
+
+.reactionsContainer {
+  @include m.flex(column, space-between);
+  height: 70px;
+  border-bottom: 0.85px solid #efefef;
+  padding: 4px 14px;
+}
+
+.reactions {
+  @include m.flex(null, null, center, 14px);
+  margin: 6px 0px;
+}
+
+.reactions img {
+  cursor: pointer;
+  width: 21px;
+}
+
+.postLikes {
+  @include m.text(12px, 400, 15px);
+}
+
+.writeComment {
+  @include m.noBorder();
+  height: 50px;
+  position: relative;
+}
+.form {
+  height: 100%;
+}
+
+.commentInput {
+  @include m.size(100%, 100%);
+  @include m.noBorder();
+  padding: 0px 48px;
+}
+
+.sendCommentBtn {
+  @include m.positionRT(absolute, 14px, 50%);
+  @include m.noBorder();
+  @include m.text(12px, 600, null, #0095f6);
+  transform: translateY(-50%);
+  padding: 0px 4px;
+  background-color: #ffffff;
+  &:hover {
+    @include m.text(12px, 700, null, #2851a3);
+  }
+}
+
+.emojiBtn {
+  @include m.positionLT(absolute, 14px, 50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+  border-radius: 50%;
+  &:hover {
+    width: 22px;
+  }
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 40px;
+}
+
+// =================== POST ACTIONS MODAL ======================
+
+.moreActionsModal {
+  @include m.positionLT(absolute, 0, 0);
+  @include m.size(100%, 100%);
+  @include m.flex(null, center);
+  background-color: rgba(0, 0, 0, 0.488);
+  z-index: 300;
+}
+
+.moreActionsModalContainer {
+  @include m.positionLT(sticky, null, 10vh);
+  @include m.size(80%, 68vh);
+  @include m.flex(null, center, center);
+}
+
+.moreActionsModalContent {
+  @include m.size(400px, fit-content);
+  // cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.moreActionsOption {
+  @include m.flex(null, center, center);
+  @include m.text(14px, 500);
+  border: 0.5px solid #dbdbdb;
+  height: 48px;
+  transition: 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(235, 234, 234, 0.932);
+  }
+}
+
+.avatar {
+  position: relative;
+  z-index: 50;
+}
+
+.avatar::after {
+  content: "";
+  @include m.positionLT(absolute, 50%, 50%);
+  @include m.size(120%, 120%);
+  position: absolute;
+  background-image: url("../../assets/coloredBorder.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+// ==========del=============
+
+.deletingHeader {
+  @include m.flexCol(10px);
+  text-align: center;
+  padding: 20px 10px;
+  h3 {
+    @include m.text(20px, 500, 24px);
+  }
+  p {
+    @include m.text(14px, 400, 18px, v.$darkGrey);
+  }
+}
+
+// ==========edit=============
+
+.editContainer {
+  @include m.size(100%, 100%);
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+// =================== COMMENT ======================
+.comment {
+  @include m.flex(null, space-between, centr);
+  padding: 10px 14px;
+}
+
+.commentLike {
+  width: 10px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.commentLeft {
+  @include m.flex(null, null, start, 10px);
+}
+
+.commentBody {
+  @include m.flexCol(5px);
+}
+
+.commentText {
+  @include m.text(12px, 400, 15px);
+}
+
+.commentInfo {
+  @include m.text(10px, 400, 13px, v.$darkGrey);
+  @include m.flex(null, null, center, 14px);
+}
+
+.deleteComment {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+    color: #ff0014;
+  }
+}
+
+// ============================ ~MEDIA~ ===============================
+
+@media screen and (max-width: 1200px) {
+  .postModal {
+    @include m.positionLT(absolute, v.$sideBarWR);
+    @include m.size(calc(100% - v.$sideBarWR), calc(100% - v.$footerHR));
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .postModalContent {
+    @include m.size(80%, 80vh);
+    @include m.scrollY;
+    display: block;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .imageContainer {
+    @include m.flex(null, center, center);
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .postImg {
+    @include m.size(100%, 100%);
+    object-fit: cover;
+  }
+
+  .interactiveSide {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .postModal {
+    @include m.positionLT(absolute, 0);
+    @include m.size(100%, calc(100% - v.$sideBarWR));
+  }
+
+  .postModalContent {
+    top: 5vh;
+  }
+}

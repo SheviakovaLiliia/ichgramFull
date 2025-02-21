@@ -1,0 +1,161 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.messagesContainer {
+  height: calc(100vh - v.$footerH);
+}
+
+.chatHeader {
+  @include m.flex(null, null, center);
+  padding: 0px 15px;
+  height: 75px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.headerContent {
+  @include m.flex(null, null, center, 12px);
+  p {
+    @include m.text(16px, 600, 20px);
+  }
+}
+
+.chatBody {
+  height: calc(100vh - v.$footerH - 75px - 64px);
+  @include m.scrollY();
+}
+
+.receiverInfo {
+  @include m.flex(column, center, center, 15px);
+  padding: 60px 0px;
+}
+
+.receiverUsername {
+  @include m.text(20px, 600, 25px);
+}
+
+.viewProfileBtn {
+  @include m.size(173px, 32px);
+  @include m.text(14px, 600, 18px);
+  @include m.flex(null, center, center);
+  @include m.noBorder();
+  background-color: #efefef;
+  border-radius: 8px;
+}
+
+.showTime {
+  @include m.text(12px, 500, 16px, #65676b);
+  @include m.flex(null, center, center);
+  height: 45px;
+}
+
+.messages {
+  @include m.flexCol(17px);
+}
+
+.messageContainer {
+  background-color: #dbdbdb;
+}
+
+.messageContainerLeft {
+  @include m.flex(null, start, null, 8px);
+  padding: 0px 16px;
+}
+
+.messageContainerRight {
+  @include m.flex(null, end, null, 8px);
+  padding: 0px 16px;
+}
+
+.message {
+  display: flex;
+}
+
+.contentLeft {
+  @include m.text(12px, 400, 15px);
+  width: 397px;
+  border-radius: 15px;
+  padding: 29px 18px;
+  background-color: #efefef;
+}
+
+.contentRight {
+  @include m.text(12px, 400, 15px, #ffffff);
+  width: 397px;
+  border-radius: 15px;
+  padding: 29px 18px;
+  background-color: #4704e2dd;
+}
+
+.messageInput {
+  @include m.size(94%, 44px);
+  @include m.text(15px, 400, 18px);
+  border-radius: 22px;
+  padding-left: 42px;
+  border: 1px solid #dbdbdb;
+  //   margin-left: 3%;
+  margin: 10px 3%;
+  &::placeholder {
+    @include m.text(15px, 400, 18px, #8e8e8e);
+  }
+  &:focus {
+    // border: none;
+    outline: none;
+    border: 1px solid #bdbbbb;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .messagesContainer {
+    height: calc(100vh - v.$footerHR);
+  }
+
+  .chatBody {
+    height: calc(100vh - v.$footerHR - 75px - 64px);
+    @include m.scrollY();
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .messagesContainer {
+    height: calc(100vh - v.$footerHR - v.$footerHR);
+  }
+
+  .chatHeader {
+    height: 60px;
+  }
+
+  .chatBody {
+    height: calc(100vh - v.$footerHR - v.$footerHR - 60px - 64px);
+    @include m.scrollY();
+  }
+
+  .receiverInfo {
+    gap: 10px;
+    padding: 40px 0px;
+  }
+
+  .messages {
+    gap: 10px;
+  }
+
+  .messageContainerLeft {
+    padding: 0px 10px;
+  }
+
+  .messageContainerRight {
+    padding: 0px 10px;
+  }
+
+  .contentLeft {
+    //   @include m.text(12px, 400, 15px);
+    width: 80%;
+
+    padding: 15px 10px;
+  }
+
+  .contentRight {
+    //   @include m.text(12px, 400, 15px, #ffffff);
+    width: 80%;
+    padding: 15px 10px;
+  }
+}
