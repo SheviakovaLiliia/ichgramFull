@@ -40,7 +40,7 @@ export const useGetHomePage = () => {
         setHasMore(false);
       }
     } catch (error) {
-      console.error("Ошибка загрузки постов:", error);
+      console.error("Error fetching posts:", error);
       setHasMore(false);
     }
   };

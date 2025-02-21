@@ -29,13 +29,13 @@ export const notificationApi = api.injectEndpoints({
             "getNotifications",
             undefined,
             (draft) => {
-              notificationsAdapter.removeOne(draft, notificationId); // Удаление комментария из списка
+              notificationsAdapter.removeOne(draft, notificationId);
             }
           )
         );
 
         try {
-          await queryFulfilled; // Ожидание завершения запроса
+          await queryFulfilled;
         } catch (error) {
           console.error("Failed to delete notification:", error);
           patchResult.undo();
@@ -44,23 +44,23 @@ export const notificationApi = api.injectEndpoints({
     }),
     deleteNotifications: builder.mutation({
       query: () => ({
-        url: `/notifications/delete-all`,
+        url: `/notifications/delete/all`,
         method: "DELETE",
         body: {},
       }),
-      async onQueryStarted(undefined, { dispatch, queryFulfilled }) {
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           notificationApi.util.updateQueryData(
             "getNotifications",
             undefined,
             (draft) => {
-              notificationsAdapter.removeAll(draft); // Удаление комментария из списка
+              notificationsAdapter.removeAll(draft);
             }
           )
         );
 
         try {
-          await queryFulfilled; // Ожидание завершения запроса
+          await queryFulfilled;
         } catch (error) {
           console.error("Failed to delete notification:", error);
           patchResult.undo();

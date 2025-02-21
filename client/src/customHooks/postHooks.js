@@ -72,6 +72,7 @@ export const useGetPost = () => {
     const currentContent = watch("content") || "";
     const newContent = currentContent + emojiData.emoji;
     setValue("content", newContent);
+    setShowEmojiPicker(false);
   };
 
   const [addComment] = useAddCommentMutation();
@@ -302,6 +303,7 @@ export const useCreateOrEditPost = (mode, post = null) => {
     setValue("content", currentContent + emojiData.emoji, {
       shouldValidate: true,
     });
+    setShowEmoji(false);
   };
 
   const [preview, setPreview] = useState(mode === "edit" ? post?.image : null);
@@ -315,8 +317,11 @@ export const useCreateOrEditPost = (mode, post = null) => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
+    let toastId;
     if (mode === "create") {
       try {
+        toastId = toast.loading("Creating post...");
+
         if (data.image) {
           formData.append("image", data.image[0]);
         }
@@ -324,28 +329,28 @@ export const useCreateOrEditPost = (mode, post = null) => {
         formData.append("content", data.content);
         // console.log(formData);
         await createPost(formData).unwrap();
-        await getMe().unwrap();
 
         reset();
-        toast.success("Post created successfully");
+        toast.success("Post created successfully", { id: toastId });
         setIsNavModalOpen(false);
       } catch (error) {
         console.error("Failed create post: ", error);
-        toast.error("Failed create post");
+        toast.error("Failed to create post", { id: toastId });
       }
     } else {
       try {
+        toastId = toast.loading("Updating post...");
         await updatePost({
           postId: post?._id,
           credentials: { content: data.newContent },
         }).unwrap();
 
         reset();
-        toast.success("Successfully updated");
+        toast.success("Successfully updated", { id: toastId });
         navigate(-1);
       } catch (error) {
         console.error("Failed update post: ", error);
-        toast.error("Failed update post");
+        toast.error("Failed to update post", { id: toastId });
       }
     }
   };

@@ -74,15 +74,17 @@ export const ProfileInfo = () => {
         </div>
         <div className={s.description}>
           <div className={s.bio}>
-            {isFullText ? user.bio : user.bio.substring(0, 90).trim() + "..."}{" "}
-            <span
-              onClick={() => {
-                setIsFullText(!isFullText);
-              }}
-              className={s.more}
-            >
-              {isFullText ? "<<" : "more"}
-            </span>
+            {isFullText ? user.bio : user.bio.substring(0, 90).trim()}
+            {user.bio.length >= 90 && (
+              <span
+                onClick={() => {
+                  setIsFullText(!isFullText);
+                }}
+                className={s.more}
+              >
+                {isFullText ? "  <<" : "...  more"}
+              </span>
+            )}
           </div>
           <div className={s.website}>
             <img src={websiteIcon} alt="website icon" />

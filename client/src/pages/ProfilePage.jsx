@@ -2,16 +2,10 @@ import s from "./Pages.module.scss";
 import { scrollUp } from "../assets";
 import { Layout } from "../layouts";
 import { ProfileInfo } from "../components";
-import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
-import { useGetMeQuery, useGetUserQuery } from "../services/userApi";
-import { useGetUserPostsQuery } from "../services/postApi";
+import { Link, useLocation } from "react-router-dom";
 import { PostModal } from "../components";
 import PostImageSkeleton from "../components/Skeletons/PostImageSkeleton";
-import ProfileInfoSkeleton from "../components/Skeletons/ProfileInfoSkeleton";
-import equal from "deep-equal";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { navContext } from "../context/navContext";
 import toast, { Toaster } from "react-hot-toast";
 import { useProfile } from "../customHooks/userHooks";
 
@@ -29,6 +23,7 @@ export const ProfilePage = () => {
     errorPosts,
     errorUser,
     fetchMoreData,
+    hasMore,
   } = useProfile();
 
   if (isLoadingMe || isLoadingUser) return <p className="loaderS"></p>;
@@ -46,11 +41,12 @@ export const ProfilePage = () => {
           {/* <ProfileInfoSkeleton /> */}
           {user && <ProfileInfo user={user} />}
 
-          {posts && (
+          {posts && posts?.length > 0 && (
             <InfiniteScroll
               dataLength={displayedPosts.length}
               next={fetchMoreData}
-              hasMore={displayedPosts.length < posts?.length}
+              // hasMore={displayedPosts.length < posts?.length}
+              hasMore={hasMore}
               loader={<PostImageSkeleton />}
               className={s.postsProfile}
             >

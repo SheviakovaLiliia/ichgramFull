@@ -12,6 +12,6 @@ router.get("/", authMiddleware, getUserNotifications);
 
 router.delete("/:notificationId", authMiddleware, deleteNotification);
 
-router.delete("/delete-all", authMiddleware, deleteAllNotifications);
+router.delete("/delete/all", authMiddleware, deleteAllNotifications);
 
 export default router;

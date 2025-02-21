@@ -60,20 +60,44 @@ export const useProfile = () => {
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [hasMore, setHasMore] = useState(true);
+
+  // useEffect(() => {
+  //   if (posts) {
+  //     setDisplayedPosts(posts.slice(0, postsPerPage));
+  //   }
+  // }, [posts, location.pathname, navState]);
+
+  // const fetchMoreData = () => {
+  //   const nextPosts = posts.slice(
+  //     page * postsPerPage,
+  //     (page + 1) * postsPerPage
+  //   );
+  //   setDisplayedPosts((prev) => [...prev, ...nextPosts]);
+  //   setPage(page + 1);
+  // };
 
   useEffect(() => {
-    if (posts) {
-      setDisplayedPosts(posts.slice(0, postsPerPage));
+    if (posts?.length) {
+      const newPosts = posts?.slice(0, postsPerPage);
+      setDisplayedPosts(newPosts);
+      setHasMore(newPosts.length < posts.length);
     }
-  }, [posts, location.pathname, navState]);
+  }, [posts]);
 
   const fetchMoreData = () => {
     const nextPosts = posts.slice(
       page * postsPerPage,
       (page + 1) * postsPerPage
     );
+
+    if (nextPosts.length === 0) {
+      setHasMore(false);
+      return;
+    }
+
     setDisplayedPosts((prev) => [...prev, ...nextPosts]);
-    setPage(page + 1);
+    setPage((prev) => prev + 1);
   };
 
   const handleFollowClick = async () => {
@@ -116,8 +140,48 @@ export const useProfile = () => {
     handleFollowClick,
     handleLogout,
     handlePrefetchChat,
+    hasMore,
   };
 };
+
+// export const useProfilee = () => {
+//   const { username } = useParams();
+//   const { data: me } = useGetMeQuery();
+//   const { data: userData } = useGetUserQuery(username, {
+//     skip: !username || username === me?.username,
+//   });
+//   const { data: posts = [] } = useGetUserPostsQuery(username);
+
+//   const isOwner = me?.username === username;
+//   const user = isOwner ? me : userData;
+
+//   const [page, setPage] = useState(1);
+//   const postsPerPage = window.innerWidth <= 768 ? 4 : 12;
+//   const [displayedPosts, setDisplayedPosts] = useState([]);
+//   const [hasMore, setHasMore] = useState(true);
+
+//   useEffect(() => {
+//     if (posts.length) {
+//       const newPosts = posts.slice(0, postsPerPage);
+//       setDisplayedPosts(newPosts);
+//       setHasMore(newPosts.length < posts.length);
+//     }
+//   }, [posts]);
+
+//   const fetchMoreData = () => {
+//     const nextPosts = posts.slice(page * postsPerPage, (page + 1) * postsPerPage);
+
+//     if (nextPosts.length === 0) {
+//       setHasMore(false);
+//       return;
+//     }
+
+//     setDisplayedPosts((prev) => [...prev, ...nextPosts]);
+//     setPage((prev) => prev + 1);
+//   };
+
+//   return { user, displayedPosts, hasMore, fetchMoreData };
+// };
 
 export const useEditProfile = () => {
   const [cropData, setCropData] = useState(null);
@@ -184,9 +248,10 @@ export const useEditProfile = () => {
   };
 
   const onSubmit = async (data) => {
+    let toastId;
     try {
       console.log(data);
-
+      toastId = toast.loading("Updating profile...");
       const formData = new FormData();
       if (data.profileImage) {
         formData.append("image", data.profileImage[0]);
@@ -197,10 +262,12 @@ export const useEditProfile = () => {
       formData.append("bio", data.about);
 
       await editProfile({ username: user.username, credentials: formData });
-      toast.success("Edited profile successfully");
+      toast.success("Edited profile successfully", { id: toastId });
       navigate(-1);
     } catch (error) {
-      toast.error("Something went wrong while updating profile");
+      toast.error("Something went wrong while updating profile", {
+        id: toastId,
+      });
       console.error("Failed to edit profile: ", error);
     }
   };

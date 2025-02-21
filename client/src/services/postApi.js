@@ -1,20 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "./config";
-import { userApi } from "./userApi";
-// import { unLikeComment } from "../api/api";
 import { api } from "./api";
+import { userApi } from "./userApi";
 import { createEntityAdapter } from "@reduxjs/toolkit";
 
 export const commentsAdapter = createEntityAdapter({
   selectId: (comment) => comment._id, // Use `_id` as the unique identifier
 });
 export const initialState = commentsAdapter.getInitialState();
-
-// export const {
-//   selectAll: selectAllComments,
-//   selectById: selectCommentById,
-//   selectIds: selectCommentIds,
-// } = commentsAdapter.getSelectors((state) => state.comments);
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -50,14 +41,18 @@ export const postApi = api.injectEndpoints({
         body: post,
       }),
       invalidatesTags: ["UserPosts"],
-      // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-      //   try {
-      //     await queryFulfilled; //waiting result
-      //     dispatch(userApi.endpoints.getMe.initiate()); // start getMe
-      //   } catch (err) {
-      //     console.error("Failed to update: ", err);
-      //   }
-      // },
+      async onQueryStarted(postId, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          userApi.util.updateQueryData("getMe", void 0, (draft) => {
+            draft.post_count += 1;
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
     updatePost: builder.mutation({
       query: ({ postId, credentials }) => ({
@@ -76,7 +71,20 @@ export const postApi = api.injectEndpoints({
         body: {},
       }),
       invalidatesTags: ["UserPosts"],
+      async onQueryStarted(postId, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          userApi.util.updateQueryData("getMe", void 0, (draft) => {
+            draft.post_count -= 1;
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
+
     //new mutations
     addComment: builder.mutation({
       query: ({ postId, credentials }) => ({
@@ -253,8 +261,6 @@ export const postApi = api.injectEndpoints({
   }),
 });
 
-
-
 export const {
   useGetPostQuery,
   useLazyGetPostQuery,
@@ -278,5 +284,3 @@ export const {
   useGetUserPostsQuery,
   useSearchPostsQuery,
 } = postApi;
-
-

@@ -10,6 +10,7 @@ import {
 import { notificationsAdapter } from "../../services/notificationApi";
 import toast, { Toaster } from "react-hot-toast";
 import PropTypes from "prop-types";
+import { useRef } from "react";
 
 export const Notifications = ({ closeModal }) => {
   const {
@@ -18,6 +19,7 @@ export const Notifications = ({ closeModal }) => {
     isFetching: isFetchingN,
     error: errorN,
   } = useGetNotificationsQuery();
+  const binRefs = useRef([]);
   const [deleteNotification] = useDeleteNotificationMutation();
   const [deleteAll] = useDeleteNotificationsMutation();
 
@@ -74,8 +76,13 @@ export const Notifications = ({ closeModal }) => {
       )}
       <h1>Notifications</h1>
       <h2>New</h2>
-      {notifications?.map((n) => (
-        <div key={n._id} className={s.notification}>
+      {notifications?.map((n, index) => (
+        <div
+          onMouseOver={() => (binRefs.current[index].style.opacity = 0.8)}
+          onMouseLeave={() => (binRefs.current[index].style.opacity = 0)}
+          key={n._id}
+          className={s.notification}
+        >
           <div className={s.leftPart}>
             <Avatar src={n?.sender?.profile_image} size="44" round={true} />
 
@@ -86,18 +93,19 @@ export const Notifications = ({ closeModal }) => {
             </p>
           </div>
 
-          {n?.type.includes("post") && (
-            <div className={s.imgContainer}>
-              <img src={n?.post?.image} alt="post" />
-            </div>
-          )}
-
           <img
+            ref={(el) => (binRefs.current[index] = el)}
             src={bin}
             alt="delete"
             onClick={() => handleDeleteNotification(n?._id)}
             className={s.delete}
           />
+
+          {n?.type.includes("post") && (
+            <div className={s.imgContainer}>
+              <img src={n?.post?.image} alt="post" />
+            </div>
+          )}
         </div>
       ))}
       <Toaster position="top-center" reverseOrder={false} />
